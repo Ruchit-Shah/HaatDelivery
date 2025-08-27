@@ -44,6 +44,15 @@ struct OrderSummary: View {
                                         onPlus:  { vm.increment(p) })
                         }.padding(.leading, 16)
                         
+                        
+                        SectionHeader(title: "Deals") { EmptyView() }
+                            .padding(.horizontal, 16)
+                        ProductCarousel(products: vm.deals) { p in
+                            DealCard(product: p,
+                                     qty: vm.qty(for: p),
+                                     onMinus: { vm.decrement(p) },
+                                     onPlus:  { vm.increment(p) })
+                        }.padding(.leading, 16)
                     }
                 }
             }
