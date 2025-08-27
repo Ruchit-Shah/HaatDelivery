@@ -10,6 +10,9 @@ import SwiftUI
 struct OrderSummary: View {
     @StateObject private var vm = MarketVM()
 
+    
+    
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
@@ -18,6 +21,13 @@ struct OrderSummary: View {
 
                         // HERO with buttons + centered search
                         ProductTopHeader(searchText: $vm.search)
+                        
+                        
+                        StoreCard(store: vm.store)
+                            .padding(.horizontal, 16)
+                            .offset(y: -40)              // pull upwards
+                            .zIndex(1)
+                            .padding(.bottom, -40)
                     }
                 }
             }
