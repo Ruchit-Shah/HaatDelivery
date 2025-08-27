@@ -5,6 +5,8 @@
 //  Created by Ruchit on 27/08/25.
 //
 
+import Foundation
+
 struct StoreInfo {
     var name: String
     var address: String

@@ -28,6 +28,22 @@ struct OrderSummary: View {
                             .offset(y: -40)              // pull upwards
                             .zIndex(1)
                             .padding(.bottom, -40)
+                        
+                        
+                        AttentionNote()
+                            .padding(.horizontal, 0)
+                        
+                        SectionHeader(title: "Recently ordered") {
+                            Text("View all").font(.callout).foregroundColor(.blue)
+                        }.padding(.horizontal, 16)
+                        
+                        ProductCarousel(products: vm.recentlyOrdered) { p in
+                            ProductCard(product: p,
+                                        qty: vm.qty(for: p),
+                                        onMinus: { vm.decrement(p) },
+                                        onPlus:  { vm.increment(p) })
+                        }.padding(.leading, 16)
+                        
                     }
                 }
             }

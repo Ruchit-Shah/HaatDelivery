@@ -10,7 +10,8 @@ import Combine
 
 final class MarketVM: ObservableObject {
     @Published var search = ""
-    
+    @Published var quantities: [UUID: Int] = [:]
+
     // Store
     let store = StoreInfo(
         name: "Carrefour Market",
@@ -23,5 +24,15 @@ final class MarketVM: ObservableObject {
         deliveryNote: "No Delivery Fee on orders above 8D"
     )
     
+    lazy var recentlyOrdered: [Product] = [
+        .init(name: "Fresh Milk 3%", brand: "Tnuva", priceNow: 10.0, unit: "1 L", imageName: "milk_carton"),
+        .init(name: "Golden Apples", brand: nil, priceNow: 11.9, unit: "500 g", imageName: "apples_golden"),
+        .init(name: "Kinder Bueno", brand: "Ferrero", priceNow: 8.49, unit: "2×43 g", imageName: "kinder_bueno", isDeal: true)
+    ]
+    
+    func qty(for product: Product) -> Int { quantities[product.id, default: 0] }
+    func increment(_ product: Product) { quantities[product.id, default: 0] += 1 }
+    func decrement(_ product: Product) { let q = quantities[product.id, default: 0]; if q > 0 { quantities[product.id] = q - 1 } }
+
 
 }
