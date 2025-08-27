@@ -18,7 +18,7 @@ struct DealCard: View {
             ZStack(alignment: .topLeading) {
                 Image(product.imageName)
                     .resizable().scaledToFill()
-                    .frame(width: 150, height: 110)
+                    .frame(width: 125, height: 110)
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 if product.isDeal {
@@ -35,7 +35,7 @@ struct DealCard: View {
             if let u = product.unit { Text(u).font(.caption).foregroundStyle(.secondary) }
             QuantityStepper(qty: qty, onMinus: onMinus, onPlus: onPlus)
         }
-        .frame(width: 160, alignment: .leading)
+        .frame(width: UIScreen.main.bounds.width / 3 - 20, alignment: .leading)
         .padding(10)
         .background {
             RoundedRectangle(cornerRadius: 14)

@@ -25,10 +25,14 @@ struct NoticeStrip: View {
             }
 
             // title + subtitle inline, first part colored/bold
-            (
-                Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(accent)
-                + Text(" \(subtitle)").font(.subheadline)
-            )
+            if #available(iOS 17.0, *) {
+                (
+                    Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(accent)
+                    + Text(" \(subtitle)").font(.subheadline)
+                )
+            } else {
+                // Fallback on earlier versions
+            }
             Spacer()
         }
         .padding(.horizontal, 12)

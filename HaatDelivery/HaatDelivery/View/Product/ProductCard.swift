@@ -12,24 +12,22 @@ struct ProductCard: View {
     let qty: Int
     let onMinus: () -> Void
     let onPlus: () -> Void
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(product.imageName)
-                .resizable().scaledToFill()
-                .frame(width: 130, height: 100)
-                .clipped()
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-
-            Text(product.name).font(.subheadline).lineLimit(2)
-            HStack {
-                PriceView(now: product.priceNow, was: product.priceWas)
-                Spacer()
+            ZStack(alignment: .topLeading) {
+                Image(product.imageName)
+                    .resizable().scaledToFit() 
+                    .frame(width: 110, height: 92)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
             }
-            if let unit = product.unit { Text(unit).font(.caption).foregroundStyle(.secondary) }
+            Text(product.name).font(.subheadline).lineLimit(1)
+            PriceView(now: product.priceNow, was: product.priceWas)
+            if let u = product.unit { Text(u).font(.caption).foregroundStyle(.secondary) }
             QuantityStepper(qty: qty, onMinus: onMinus, onPlus: onPlus)
         }
-        .frame(width: 150, alignment: .leading)
+        .frame(width: UIScreen.main.bounds.width / 4, alignment: .leading)
         .padding(10)
         .background {
             RoundedRectangle(cornerRadius: 14)
@@ -37,4 +35,4 @@ struct ProductCard: View {
                 .shadow(color: .black.opacity(0.06), radius: 6, y: 3)
         }
     }
-} 
+}
