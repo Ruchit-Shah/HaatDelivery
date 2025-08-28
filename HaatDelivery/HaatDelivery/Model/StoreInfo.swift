@@ -17,3 +17,25 @@ struct StoreInfo {
     var saleNote: String
     var deliveryNote: String
 }
+
+
+/**
+ struct StoreInfo: Codable {
+     var address: String
+     var isOpen: Bool
+     var openUntil: String
+     var rating: Double
+     var ratingCount: Int
+     var saleNote: String
+     var deliveryNote: String
+     
+     let name: LocalizedName
+     
+     
+     struct LocalizedName: Codable {
+         let en: String?
+         let ar: String?
+     }
+ }
+
+ */
