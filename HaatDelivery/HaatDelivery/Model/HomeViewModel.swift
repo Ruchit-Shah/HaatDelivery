@@ -5,29 +5,36 @@
 //  Created by Ruchit on 28/08/25.
 //
 
+import Foundation
 
-//import Foundation
-//
-//@MainActor
-//class HomeViewModel: ObservableObject {
-//    @Published var venueName: String = ""
-//    
-//    func loadVenueInfo() async {
-//        let endpoint = Endpoint(
-//            path: "api/venue/4012/info",
-//            queryItems: [
-//                URLQueryItem(name: "userLatitude", value: "0.0"),
-//                URLQueryItem(name: "userLongitude", value: "0.0"),
-//                URLQueryItem(name: "isByLocation", value: "false")
-//            ],
-//            method: "GET"
-//        )
-//
-//        do {
-//            let response = try await APIClient.shared.request(endpoint, responseType: StoreInfo.self)
-//            venueName = response.name.en ?? "Unknown"
-//        } catch {
-//            print("Error loading venue:", error)
-//        }
-//    }
-//}
+class HomeViewModel: ObservableObject {
+    @Published var moodOptions: [Category] = []
+    @Published var categories: [Category] = []
+    @Published var marketCards: [MarketCard] = []
+
+    init() {
+        loadMockData()
+    }
+
+    func loadMockData() {
+        moodOptions = [
+            .init(title: "BREAKFAST", imageName: "88x88px"),
+            .init(title: "LUNCH", imageName: "88x88px"),
+            .init(title: "DINNER", imageName: "88x88px"),
+            .init(title: "DESSERT", imageName: "88x88px"),
+            .init(title: "SNACKS", imageName: "88x88px")
+        ]
+        
+        categories = [
+            .init(title: "Category 1", imageName: "85x85px"),
+            .init(title: "Category 2", imageName: "85x85px"),
+            .init(title: "Category 3", imageName: "85x85px")
+        ]
+        
+        marketCards = [
+            .init(title: "Business in horizontal category", imageName: "85x85px", badge: "UP TO 10%", subBadge: nil, isFree: false, openUntil: "11:00"),
+            .init(title: "Discount Store", imageName: "85x85px", badge: "DISCOUNT", subBadge: "UP TO 10%", isFree: false, openUntil: "11:00"),
+            .init(title: "Freebie Mart", imageName: "85x85px", badge: "UP TO 15%", subBadge: nil, isFree: true, openUntil: "11:00")
+        ]
+    }
+}

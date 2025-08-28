@@ -11,7 +11,7 @@ import SwiftUI
 struct HaatDeliveryApp: App {
     var body: some Scene {
         WindowGroup {
-            OrderSummary()
+           HomeView() //OrderSummary()
         }
     }
 }
