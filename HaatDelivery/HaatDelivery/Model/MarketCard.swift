@@ -12,8 +12,9 @@ struct MarketCard: Identifiable {
     let id = UUID()
     let title: String
     let imageName: String
-    let badge: String
+    let badge: String?
     let subBadge: String?
     let isFree: Bool
     let openUntil: String
+    let subtitle: String?
 }
