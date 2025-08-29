@@ -20,8 +20,8 @@ struct HomeView: View {
                     exploreMarketSection
                     marketCardList(viewModel: viewModel)
                     newInHaatSection
-                    
-                    
+                    recommondedResturantSection
+                    breakfastTimeSection
                     
                     Spacer()
                 }
@@ -74,6 +74,120 @@ struct HomeView: View {
     }
     
     // MARK: - Sections
+    
+    private var recommondedResturantSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            
+            // MARK: - Section Header
+            HStack {
+                Text("Recommended Restaurants")
+                    .font(.headline)
+                    .foregroundColor(.black)
+//                Spacer()
+                
+                Button(action: {}) {
+                    Text("View all")
+                        .font(.caption.bold())
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Color.pink)
+                        .cornerRadius(16)
+                }
+            }
+            .padding(.horizontal)
+            HStack {
+                Text("Sponsored")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .lineLimit(1)
+                Spacer()
+            }
+            .padding(.horizontal)
+
+            // MARK: - Horizontal Scroll Cards
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(viewModel.marketCards) { card in
+                        VStack(alignment: .leading, spacing: 8) {
+                            
+                            // MARK: - Badges (up to 2)
+                            VStack(alignment: .leading, spacing: 4) {
+                                if card.isFree {
+                                    Text("FREE")
+                                        .font(.caption2.bold())
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(Color(red: 0.8, green: 0.0, blue: 0.3)) // deep pink
+                                        .cornerRadius(4)
+                                }
+                                
+                                if let subBadge = card.subBadge {
+                                    Text(subBadge)
+                                        .font(.caption2.bold())
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(Color.red)
+                                        .cornerRadius(4)
+                                }
+                            }
+
+                            // MARK: - Centered Circular Image (85x85)
+                            HStack {
+                                Spacer()
+                                Image(card.imageName)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 85, height: 85)
+                                    .clipShape(Circle())
+                                Spacer()
+                            }
+
+                            // MARK: - Title
+                            Text(card.title)
+                                .font(.subheadline.bold())
+                                .foregroundColor(.black)
+                                .lineLimit(2)
+                                .fixedSize(horizontal: false, vertical: true)
+
+                            // MARK: - Subtitle
+                            Text(card.subtitle ?? "Umm Al Fahem, Ain al-N...")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+
+                            // MARK: - Footer: NEW + open time
+                            HStack(spacing: 4) {
+                                Text("NEW! ✦")
+                                    .font(.caption2.bold())
+                                    .foregroundColor(.black)
+
+                                Spacer()
+
+                                Text("Open until \(card.openUntil)")
+                                    .font(.caption2)
+                                    .foregroundColor(.green)
+                            }
+                        }
+                        .padding()
+                        .frame(width: 148)
+                        .background(Color.white)
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+                        )
+                        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                    }
+                }
+                .padding(.horizontal)
+            }
+        }
+        .padding(.top)
+    }
+    
     private var newInHaatSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             
@@ -210,6 +324,30 @@ struct HomeView: View {
                 .padding(.horizontal)
             }
         }
+    }
+    
+    private var breakfastTimeSection: some View {
+        HStack(alignment: .center) {
+            // LEFT SIDE: Text Block
+            VStack(alignment: .leading, spacing: 6) {
+                // This HStack prevents breaking into new line
+                HStack(spacing: 6) {
+                   
+                    Image("breakfasttime")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 144)
+                }
+                
+                marketCardList(viewModel: viewModel)
+            }
+            
+            Spacer()
+        }
+        .padding()
+        .background(Color(red: 1.0, green: 0.94, blue: 0.92)) // light peach
+        .cornerRadius(12)
+
     }
     
     private var exploreMarketSection: some View {
